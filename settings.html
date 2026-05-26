@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Settings</title>
+
+    <link rel="stylesheet" href="settings.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div>
+
+                <div class="logo">
+                    <h1>AmortizePro</h1>
+                    <p>Financial Analytics</p>
+                </div>
+
+                <nav class="sidebar-nav">
+
+                    <a href="#">
+                        <i class="fa-solid fa-table-columns"></i>
+                        <span>Overview</span>
+                    </a>
+
+                    <a href="#">
+                        <i class="fa-solid fa-calculator"></i>
+                        <span>Calculator</span>
+                    </a>
+
+                    <a href="#">
+                        <i class="fa-regular fa-rectangle-list"></i>
+                        <span>Amortization</span>
+                    </a>
+
+                    <a href="#" class="active">
+                        <i class="fa-solid fa-gear"></i>
+                        <span>Settings</span>
+                    </a>
+
+                </nav>
+
+            </div>
+
+            <div>
+
+                <button class="export-btn">
+                    Export Report
+                </button>
+
+                <a href="#" class="bottom-link">
+                    <i class="fa-regular fa-circle-question"></i>
+                    <span>Help</span>
+                </a>
+
+                <a href="#" class="bottom-link" onclick="logout()">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN -->
+        <main class="main-content">
+
+            <!-- TOPBAR -->
+            <header class="topbar">
+
+                <div class="top-left">
+
+                    <h2>AmortizePro</h2>
+
+                    <nav class="top-nav">
+                        <a href="#">Dashboard</a>
+                        <a href="#">Calculator</a>
+                        <a href="#">Schedules</a>
+                        <a href="#">Reports</a>
+                    </nav>
+
+                </div>
+
+                <div class="top-right">
+
+                    <strong id="topUserId">
+                        USER ID
+                    </strong>
+
+                    <button class="new-loan-btn">
+                        New Loan
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- CONTENT -->
+            <section class="content">
+
+                <div class="page-header">
+                    <h1>Settings</h1>
+
+                    <p>
+                        Manage your account preferences and application environment.
+                    </p>
+                </div>
+
+
+                <!-- ROW -->
+                <div class="grid-row single-grid">
+
+                    <!-- PERSONAL -->
+                    <div class="card personal-card">
+
+                        <div class="card-title">
+                            <i class="fa-regular fa-user"></i>
+                            <span>PERSONAL INFORMATION</span>
+                        </div>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+                                <label>Full Name</label>
+
+                                <input type="text" id="fullName" />
+                            </div>
+
+                            <div class="form-group">
+                                <label>Email Address</label>
+
+                                <input type="email" id="emailAddress" />
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label>Role / Organization</label>
+
+                            <input type="text" id="roleOrg" />
+                        </div>
+
+                        <div class="save-btn-wrap">
+
+                            <button type="button" class="save-btn" onclick="saveChanges()">
+                                Save Changes
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- SECOND ROW -->
+                <div class="grid-row second-row">
+
+                    <!-- SECURITY -->
+                    <div class="card">
+
+                        <div class="card-title">
+                            <i class="fa-solid fa-lock"></i>
+                            <span>SECURITY</span>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Current Password</label>
+
+                            <input type="password" id="currentPassword" />
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>New Password</label>
+
+                            <input type="password" id="newPassword" />
+
+                        </div>
+
+                        <button class="save-btn" onclick="changePassword()">
+                            Change Password
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- REGIONAL -->
+                    <div class="card">
+
+                        <div class="card-title">
+                            <i class="fa-solid fa-globe"></i>
+                            <span>REGIONAL SETTINGS</span>
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Preferred Currency</label>
+
+                            <select>
+
+                                <option>USD ($) - US Dollar</option>
+                                <option>EUR (€) - Euro</option>
+                                <option>GBP (£) - Pound Sterling</option>
+                                <option>INR (₹) - Indian Rupee</option>
+                                <option>JPY (¥) - Japanese Yen</option>
+                                <option>AUD ($) - Australian Dollar</option>
+                                <option>CAD ($) - Canadian Dollar</option>
+                                <option>CHF (₣) - Swiss Franc</option>
+                                <option>CNY (¥) - Chinese Yuan</option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Timezone</label>
+
+                            <select>
+
+                                <option>(GMT-05:00) Eastern Time</option>
+                                <option>(GMT+00:00) UTC</option>
+                                <option>(GMT+05:30) India Standard Time</option>
+                                <option>(GMT+01:00) Central European Time</option>
+                                <option>(GMT+09:00) Japan Standard Time</option>
+                                <option>(GMT+10:00) Australian Eastern Time</option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DANGER -->
+                <div class="danger-box">
+
+                    <div>
+
+                        <h3>Deactivate Account</h3>
+
+                        <p>
+                            Permanently remove your access and archive all
+                            financial records. This action is irreversible.
+                        </p>
+
+                    </div>
+
+                    <button class="danger-btn" onclick="deleteAccount()">
+                        Deactivate
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="settings.js"></script>
+
+</body>
+
+</html>
