@@ -30,10 +30,13 @@
 
       <div class="menu">
 
-        <div class="menu-item">
-          <i class="fa-solid fa-table-columns"></i>
-          Overview
-        </div>
+        <div class="menu-item"
+     onclick="window.location.href='dummy-overview.html'">
+
+  <i class="fa-solid fa-table-columns"></i>
+  Overview
+
+</div>
 
         <div class="menu-item active">
           <i class="fa-solid fa-calculator"></i>
@@ -65,12 +68,10 @@
           <i class="fa-solid fa-download"></i>
           Export Report
         </button>
-
-        <button class="export-btn">
-          <i class="fa-regular fa-file-pdf"></i>
-          Export PDF
-        </button>
-      </div>
+<button class="export-btn" id="exportPdfBtn">
+  <i class="fa-regular fa-file-pdf"></i>
+  Export PDF
+</button>
 
       <div class="side-footer">
         <div>
@@ -341,6 +342,9 @@
   </main>
 
 </div>
+<!-- jsPDF Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <script src="Calculator.js"></script>
 
 

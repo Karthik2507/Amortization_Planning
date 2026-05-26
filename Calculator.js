@@ -402,3 +402,102 @@ Balance   : ${cols[5].innerText}
 
     link.click();
 }
+
+// EXPORT PDF BUTTON
+
+const exportPdfBtn =
+    document.getElementById("exportPdfBtn");
+
+exportPdfBtn.addEventListener("click", exportPDF);
+
+// PDF EXPORT FUNCTION
+
+function exportPDF() {
+
+    // jsPDF INIT
+
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF();
+
+    // GET VALUES
+
+    const principal =
+        document.getElementById("principalAmount").innerText;
+
+    const interest =
+        document.getElementById("totalInterest").innerText;
+
+    const totalPayment =
+        document.getElementById("totalPayment").innerText;
+
+    const remainingBalance =
+        document.getElementById("remainingBalance").innerText;
+
+    const payoffDate =
+        document.getElementById("payoffDate").innerText;
+
+    // TITLE
+
+    doc.setFontSize(18);
+    doc.text("Amortization Report", 20, 20);
+
+    // SUMMARY
+
+    doc.setFontSize(12);
+
+    doc.text(`Total Principal: ${principal}`, 20, 40);
+    doc.text(`Total Interest: ${interest}`, 20, 50);
+    doc.text(`Total Payment: ${totalPayment}`, 20, 60);
+    doc.text(`Remaining Balance: ${remainingBalance}`, 20, 70);
+    const cleanPayoffDate =
+    payoffDate.replace("⏱", "");
+
+doc.text(cleanPayoffDate, 20, 80);
+
+    // TABLE HEADER
+
+    let y = 100;
+
+    doc.setFontSize(11);
+
+    doc.text("P#", 20, y);
+    doc.text("Date", 35, y);
+    doc.text("Payment", 65, y);
+    doc.text("Principal", 100, y);
+    doc.text("Interest", 135, y);
+    doc.text("Balance", 170, y);
+
+    y += 10;
+
+    // GET TABLE ROWS
+
+    const rows =
+        document.querySelectorAll("#scheduleBody tr");
+
+    rows.forEach((row) => {
+
+        const cols = row.querySelectorAll("td");
+
+        doc.text(cols[0].innerText, 20, y);
+        doc.text(cols[1].innerText, 35, y);
+        doc.text(cols[2].innerText, 65, y);
+        doc.text(cols[3].innerText, 100, y);
+        doc.text(cols[4].innerText, 135, y);
+        doc.text(cols[5].innerText, 170, y);
+
+        y += 10;
+
+        // NEW PAGE IF NEEDED
+
+        if (y > 280) {
+            doc.addPage();
+            y = 20;
+        }
+
+    });
+
+    // SAVE PDF
+
+    doc.save("Amortization_Report.pdf");
+}

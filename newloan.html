@@ -25,19 +25,24 @@
 
     .container{
       display:flex;
-      min-height:100vh;
+      height:100vh;
+      overflow:hidden;
     }
 
     /* SIDEBAR */
 
     .sidebar{
       width:230px;
+      height:100vh;
       background:#fff;
       border-right:1px solid #ddd;
       display:flex;
       flex-direction:column;
       justify-content:space-between;
       padding:20px 15px;
+      position:fixed;
+      left:0;
+      top:0;
     }
 
     .logo h1{
@@ -63,11 +68,12 @@
       gap:14px;
       padding:14px;
       margin-bottom:10px;
-      border-radius:6px;
+      border-radius:8px;
       cursor:pointer;
       color:#444;
       font-size:14px;
       font-weight:600;
+      transition:0.2s ease;
     }
 
     .menu-item.active{
@@ -77,22 +83,7 @@
 
     .menu-item:hover{
       background:#eef3ff;
-    }
-
-    .bottom-buttons{
-      margin-top:30px;
-    }
-
-    .export-btn{
-      width:100%;
-      background:#000;
-      color:#fff;
-      border:none;
-      padding:12px;
-      margin-bottom:14px;
-      border-radius:4px;
-      font-weight:600;
-      cursor:pointer;
+      transform:translateX(3px);
     }
 
     .side-footer{
@@ -107,12 +98,21 @@
       font-size:14px;
       color:#444;
       cursor:pointer;
+      border-radius:6px;
+      transition:0.2s;
+    }
+
+    .side-footer div:hover{
+      background:#f4f4f4;
     }
 
     /* MAIN */
 
     .main{
       flex:1;
+      margin-left:230px;
+      height:100vh;
+      overflow-y:auto;
       display:flex;
       flex-direction:column;
     }
@@ -121,6 +121,7 @@
 
     .content{
       padding:35px;
+      flex:1;
     }
 
     .page-title{
@@ -140,9 +141,10 @@
     .loan-form-card{
       background:#fff;
       border:1px solid #ddd;
-      border-radius:10px;
+      border-radius:14px;
       padding:30px;
       max-width:980px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.03);
     }
 
     .form-grid{
@@ -167,16 +169,18 @@
     .form-group select{
       height:54px;
       border:1px solid #ccc;
-      border-radius:6px;
+      border-radius:8px;
       padding:0 15px;
       font-size:15px;
       background:#fff;
       outline:none;
+      transition:0.25s ease;
     }
 
     .form-group input:focus,
     .form-group select:focus{
-      border-color:#000;
+      border-color:#111;
+      box-shadow:0 0 0 4px rgba(0,0,0,0.06);
     }
 
     .divider{
@@ -187,7 +191,7 @@
     .info-box{
       margin-top:25px;
       background:#f5f6f8;
-      border-radius:8px;
+      border-radius:10px;
       padding:18px;
       display:flex;
       gap:14px;
@@ -214,20 +218,31 @@
       height:50px;
       background:#fff;
       border:1px solid #ccc;
-      border-radius:6px;
+      border-radius:8px;
       font-weight:600;
       cursor:pointer;
+      transition:0.2s;
+    }
+
+    .cancel-btn:hover{
+      background:#f4f4f4;
     }
 
     .create-btn{
-      width:160px;
+      width:170px;
       height:50px;
       background:#000;
       color:#fff;
       border:none;
-      border-radius:6px;
+      border-radius:8px;
       font-weight:700;
       cursor:pointer;
+      transition:0.2s;
+    }
+
+    .create-btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 20px rgba(0,0,0,0.15);
     }
 
     /* PRO TIP */
@@ -235,10 +250,11 @@
     .tip-card{
       margin-top:30px;
       background:#fff;
-      border-radius:10px;
+      border-radius:14px;
       overflow:hidden;
       border:1px solid #ddd;
       max-width:980px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.03);
     }
 
     .tip-image{
@@ -285,18 +301,253 @@
       color:#555;
     }
 
+    /* POPUP */
+
+    .popup-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.5);
+      display:none;
+      justify-content:center;
+      align-items:center;
+      z-index:999;
+      backdrop-filter:blur(4px);
+    }
+
+    .popup-box{
+      width:520px;
+      background:#fff;
+      border-radius:16px;
+      padding:30px;
+      box-shadow:0 20px 50px rgba(0,0,0,0.25);
+      animation:popupFade .3s ease;
+    }
+
+    @keyframes popupFade{
+      from{
+        opacity:0;
+        transform:translateY(20px) scale(.95);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+      }
+    }
+
+    .popup-box h2{
+      margin-bottom:20px;
+      font-size:24px;
+    }
+
+    .popup-details{
+      line-height:2;
+      color:#333;
+      font-size:15px;
+    }
+
+    .popup-details strong{
+      color:#000;
+    }
+
+    .popup-buttons{
+      margin-top:25px;
+      display:flex;
+      justify-content:flex-end;
+      gap:15px;
+    }
+
+    .edit-btn{
+      width:110px;
+      height:45px;
+      border:1px solid #ccc;
+      background:#fff;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:600;
+    }
+
+    .submit-btn{
+      width:120px;
+      height:45px;
+      border:none;
+      background:#000;
+      color:#fff;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    /* ADVANCED TOAST */
+
+    .toast-container{
+      position:fixed;
+      top:25px;
+      right:25px;
+      z-index:5000;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+
+    .toast{
+      min-width:340px;
+      max-width:420px;
+      background:#fff;
+      border-radius:14px;
+      padding:18px;
+      display:flex;
+      align-items:flex-start;
+      gap:14px;
+      box-shadow:
+        0 10px 30px rgba(0,0,0,0.12),
+        0 2px 8px rgba(0,0,0,0.06);
+      border-left:5px solid #111;
+      transform:translateX(120%);
+      opacity:0;
+      animation:slideIn .45s ease forwards;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .toast.success{
+      border-left-color:#16a34a;
+    }
+
+    .toast.error{
+      border-left-color:#dc2626;
+    }
+
+    .toast.warning{
+      border-left-color:#f59e0b;
+    }
+
+    .toast-icon{
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:18px;
+      flex-shrink:0;
+    }
+
+    .toast.success .toast-icon{
+      background:#dcfce7;
+      color:#16a34a;
+    }
+
+    .toast.error .toast-icon{
+      background:#fee2e2;
+      color:#dc2626;
+    }
+
+    .toast.warning .toast-icon{
+      background:#fef3c7;
+      color:#f59e0b;
+    }
+
+    .toast-content{
+      flex:1;
+    }
+
+    .toast-title{
+      font-size:15px;
+      font-weight:700;
+      margin-bottom:4px;
+      color:#111;
+    }
+
+    .toast-message{
+      font-size:14px;
+      color:#555;
+      line-height:1.5;
+    }
+
+    .toast-close{
+      background:none;
+      border:none;
+      cursor:pointer;
+      color:#888;
+      font-size:15px;
+    }
+
+    .toast-progress{
+      position:absolute;
+      left:0;
+      bottom:0;
+      height:4px;
+      width:100%;
+      background:rgba(0,0,0,0.08);
+    }
+
+    .toast-progress::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:0;
+      height:100%;
+      width:100%;
+      background:#111;
+      animation:progress 4s linear forwards;
+    }
+
+    .toast.success .toast-progress::before{
+      background:#16a34a;
+    }
+
+    .toast.error .toast-progress::before{
+      background:#dc2626;
+    }
+
+    .toast.warning .toast-progress::before{
+      background:#f59e0b;
+    }
+
+    @keyframes slideIn{
+      to{
+        transform:translateX(0);
+        opacity:1;
+      }
+    }
+
+    @keyframes slideOut{
+      to{
+        transform:translateX(120%);
+        opacity:0;
+      }
+    }
+
+    @keyframes progress{
+      from{
+        width:100%;
+      }
+      to{
+        width:0%;
+      }
+    }
+
     @media(max-width:900px){
 
       .form-grid{
         grid-template-columns:1fr;
       }
-      
+
       .content{
         padding:20px;
       }
 
       .page-title{
         font-size:30px;
+      }
+
+      .toast{
+        min-width:90vw;
+      }
+
+      footer{
+        flex-direction:column;
+        gap:12px;
       }
 
     }
@@ -321,58 +572,70 @@
 
       <div class="menu">
 
-        <div class="menu-item">
-          <i class="fa-solid fa-table-columns"></i>
-          Overview
-        </div>
+  <!-- OVERVIEW -->
 
-        <div class="menu-item">
-          <i class="fa-solid fa-calculator"></i>
-          Calculator
-        </div>
+  <div class="menu-item"
+       onclick="window.location.href='dummy-overview.html'">
 
-        <div class="menu-item">
-          <i class="fa-regular fa-rectangle-list"></i>
-          Amortization
-        </div>
+    <i class="fa-solid fa-table-columns"></i>
+    Overview
 
-        <div class="menu-item">
-          <i class="fa-solid fa-chart-column"></i>
-          Reports
-        </div>
+  </div>
 
-        <div class="menu-item">
-          <i class="fa-solid fa-gear"></i>
-          Settings
-        </div>
+  <!-- CALCULATOR -->
 
-      </div>
+  <div class="menu-item"
+       onclick="window.location.href='calculator.html'">
+
+    <i class="fa-solid fa-calculator"></i>
+    Calculator
+
+  </div>
+
+  <!-- AMORTIZATION -->
+
+  <div class="menu-item"
+       onclick="window.location.href='amortization.html'">
+
+    <i class="fa-regular fa-rectangle-list"></i>
+    Amortization
+
+  </div>
+
+  <!-- REPORTS -->
+
+  <div class="menu-item"
+       onclick="window.location.href='reports.html'">
+
+    <i class="fa-solid fa-chart-column"></i>
+    Reports
+
+  </div>
+
+  <!-- SETTINGS -->
+
+  <div class="menu-item"
+       onclick="window.location.href='settings.html'">
+
+    <i class="fa-solid fa-gear"></i>
+    Settings
+
+  </div>
+
+</div>
 
     </div>
 
-    <div>
+    <div class="side-footer">
 
-      <div class="bottom-buttons">
-
-        <button class="export-btn">
-          <i class="fa-solid fa-download"></i>
-          Export Report
-        </button>
-
+      <div>
+        <i class="fa-regular fa-circle-question"></i>
+        Help
       </div>
 
-      <div class="side-footer">
-
-        <div>
-          <i class="fa-regular fa-circle-question"></i>
-          Help
-        </div>
-
-        <div>
-          <i class="fa-solid fa-arrow-right-from-bracket"></i>
-          Logout
-        </div>
-
+      <div>
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        Logout
       </div>
 
     </div>
@@ -382,9 +645,6 @@
   <!-- MAIN -->
 
   <main class="main">
-
-
-    <!-- CONTENT -->
 
     <div class="content">
 
@@ -402,17 +662,18 @@
         <div class="form-grid">
 
           <div class="form-group">
-            <label>Loan Name</label>
-            <input type="text"
-              id="loanName"
-              placeholder="e.g. Primary Home Mortgage">
+            <label>Loan ID</label>
+            <input type="text" id="loanID" placeholder="e.g. 1001">
           </div>
 
           <div class="form-group">
             <label>Lender</label>
-            <input type="text"
-              id="lender"
-              placeholder="e.g. Chase Bank">
+            <input type="text" id="lender" placeholder="e.g. Chase Bank">
+          </div>
+
+          <div class="form-group">
+            <label>Loan Name</label>
+            <input type="text" id="loanName" placeholder="e.g. Primary Home Mortgage">
           </div>
 
         </div>
@@ -423,28 +684,17 @@
 
           <div class="form-group">
             <label>Principal Amount ($)</label>
-            <input type="number"
-              id="loanAmount"
-              placeholder="$ 0.00">
+            <input type="number" id="loanAmount" placeholder="$ 0.00">
           </div>
 
           <div class="form-group">
             <label>Annual Interest Rate (%)</label>
-            <input type="number"
-              id="interestRate"
-              placeholder="4.5">
+            <input type="number" id="interestRate" placeholder="4.5">
           </div>
 
           <div class="form-group">
             <label>Loan Term (Years)</label>
-
-            <select id="loanTerm">
-              <option>5 Years</option>
-              <option>10 Years</option>
-              <option>15 Years</option>
-              <option>20 Years</option>
-              <option selected>30 Years</option>
-            </select>
+            <input type="text" id="loanTerm" placeholder="e.g. 2.5">
           </div>
 
           <div class="form-group">
@@ -535,9 +785,7 @@
 
       <div>
         <strong>AmortizePro</strong>
-        &nbsp;&nbsp;
         © 2024 AmortizePro Financial Systems.
-        All rights reserved.
       </div>
 
       <div class="footer-links">
@@ -552,22 +800,141 @@
 
 </div>
 
+<!-- POPUP -->
+
+<div class="popup-overlay" id="popupOverlay">
+
+  <div class="popup-box">
+
+    <h2>Confirm Loan Details</h2>
+
+    <div class="popup-details" id="popupDetails"></div>
+
+    <div class="popup-buttons">
+
+      <button class="edit-btn" id="editBtn">
+        Edit
+      </button>
+
+      <button class="submit-btn" id="submitBtn">
+        Submit
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- TOAST CONTAINER -->
+
+<div class="toast-container" id="toastContainer"></div>
+
 <script>
 
-  // CREATE LOAN BUTTON
+function showToast(type, title, message){
+
+  const toastContainer =
+    document.getElementById("toastContainer");
+
+  const toast =
+    document.createElement("div");
+
+  toast.className = `toast ${type}`;
+
+  let icon = "fa-circle-check";
+
+  if(type === "error"){
+    icon = "fa-circle-xmark";
+  }
+
+  if(type === "warning"){
+    icon = "fa-triangle-exclamation";
+  }
+
+  toast.innerHTML = `
+  
+    <div class="toast-icon">
+      <i class="fa-solid ${icon}"></i>
+    </div>
+
+    <div class="toast-content">
+
+      <div class="toast-title">
+        ${title}
+      </div>
+
+      <div class="toast-message">
+        ${message}
+      </div>
+
+    </div>
+
+    <button class="toast-close">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <div class="toast-progress"></div>
+  
+  `;
+
+  toastContainer.appendChild(toast);
+
+  toast.querySelector(".toast-close")
+    .addEventListener("click", () => {
+
+      toast.style.animation =
+        "slideOut .4s ease forwards";
+
+      setTimeout(() => {
+        toast.remove();
+      }, 400);
+
+  });
+
+  setTimeout(() => {
+
+    toast.style.animation =
+      "slideOut .4s ease forwards";
+
+    setTimeout(() => {
+      toast.remove();
+    }, 400);
+
+  }, 4000);
+
+}
+
+window.onload = function () {
 
   const createLoanBtn =
     document.getElementById("createLoanBtn");
 
-  createLoanBtn.addEventListener("click", createLoan);
+  const cancelBtn =
+    document.getElementById("cancelBtn");
 
-  function createLoan(){
+  const popupOverlay =
+    document.getElementById("popupOverlay");
 
-    const loanName =
-      document.getElementById("loanName").value;
+  const popupDetails =
+    document.getElementById("popupDetails");
+
+  const editBtn =
+    document.getElementById("editBtn");
+
+  const submitBtn =
+    document.getElementById("submitBtn");
+
+  createLoanBtn.addEventListener("click", function () {
+
+    const loanID =
+      document.getElementById("loanID").value;
 
     const lender =
       document.getElementById("lender").value;
+
+    const loanName =
+      document.getElementById("loanName").value;
 
     const loanAmount =
       document.getElementById("loanAmount").value;
@@ -581,57 +948,149 @@
     const startDate =
       document.getElementById("startDate").value;
 
-    // VALIDATION
+    if (
+      loanID === "" ||
+      lender === "" ||
+      loanName === "" ||
+      loanAmount === "" ||
+      interestRate === "" ||
+      loanTerm === "" ||
+      startDate === ""
+    ) {
 
-    if(
-      !loanName ||
-      !lender ||
-      !loanAmount ||
-      !interestRate ||
-      !startDate
-    ){
-      alert("Please fill all required fields");
+      showToast(
+        "error",
+        "Missing Fields",
+        "Please complete all required loan information."
+      );
+
       return;
+
     }
 
-    // SAVE DATA
+   popupDetails.innerHTML = `
+
+  <p>
+    <strong>Loan ID:</strong>
+    <span style="color:#dc2626; font-weight:700;">
+      ${loanID}
+    </span>
+  </p>
+
+  <p>
+    <strong>Lender:</strong>
+    ${lender}
+  </p>
+
+  <p>
+    <strong>Loan Name:</strong>
+    ${loanName}
+  </p>
+
+  <p>
+    <strong>Principal Amount ($):</strong>
+    <span style="color:#dc2626; font-weight:700;">
+      $${loanAmount}
+    </span>
+  </p>
+
+  <p>
+    <strong>Annual Interest Rate (%):</strong>
+    <span style="color:#dc2626; font-weight:700;">
+      ${interestRate}%
+    </span>
+  </p>
+
+  <p>
+    <strong>Loan Term (Years):</strong>
+    <span style="color:#dc2626; font-weight:700;">
+      ${loanTerm}
+    </span>
+  </p>
+
+  <p>
+    <strong>Start Date:</strong>
+    <span style="color:#dc2626; font-weight:700;">
+      ${startDate}
+    </span>
+  </p>
+
+`;
+
+    popupOverlay.style.display = "flex";
+
+  });
+
+  editBtn.addEventListener("click", function () {
+
+    popupOverlay.style.display = "none";
+
+  });
+
+  submitBtn.addEventListener("click", function () {
 
     const loanData = {
 
-      loanName,
-      lender,
-      loanAmount,
-      interestRate,
-      loanTerm,
-      startDate
+      loanID:
+        document.getElementById("loanID").value,
+
+      lender:
+        document.getElementById("lender").value,
+
+      loanName:
+        document.getElementById("loanName").value,
+
+      loanAmount:
+        document.getElementById("loanAmount").value,
+
+      interestRate:
+        document.getElementById("interestRate").value,
+
+      loanTerm:
+        document.getElementById("loanTerm").value,
+
+      startDate:
+        document.getElementById("startDate").value
 
     };
-
-    // STORE IN LOCAL STORAGE
 
     localStorage.setItem(
       "loanData",
       JSON.stringify(loanData)
     );
 
-    alert("Loan Created Successfully");
+    popupOverlay.style.display = "none";
 
-    // REDIRECT
+    showToast(
+      "success",
+      "Loan Created Successfully",
+      "Your loan profile has been saved."
+    );
 
-    window.location.href = "../index.html";
+    setTimeout(() => {
 
-  }
+      window.location.href =
+        "calculator.html";
 
-  // CANCEL BUTTON
-
-  const cancelBtn =
-    document.getElementById("cancelBtn");
-
-  cancelBtn.addEventListener("click", () => {
-
-    window.history.back();
+    }, 1800);
 
   });
+
+  cancelBtn.addEventListener("click", function () {
+
+    document.querySelectorAll("input").forEach(input => {
+      input.value = "";
+    });
+
+    showToast(
+      "warning",
+      "Form Cleared",
+      "All entered loan information has been removed."
+    );
+
+  });
+
+};
 
 </script>
 
