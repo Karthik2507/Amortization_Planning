@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create New Loan - AmortizePro</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      background:#f5f6f8;
+      color:#111;
+    }
+
+    .container{
+      display:flex;
+      min-height:100vh;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar{
+      width:230px;
+      background:#fff;
+      border-right:1px solid #ddd;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      padding:20px 15px;
+    }
+
+    .logo h1{
+      font-size:18px;
+      font-weight:700;
+    }
+
+    .logo p{
+      font-size:10px;
+      letter-spacing:1px;
+      color:#666;
+      margin-top:5px;
+      font-weight:600;
+    }
+
+    .menu{
+      margin-top:35px;
+    }
+
+    .menu-item{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:14px;
+      margin-bottom:10px;
+      border-radius:6px;
+      cursor:pointer;
+      color:#444;
+      font-size:14px;
+      font-weight:600;
+    }
+
+    .menu-item.active{
+      background:#dce9ff;
+      color:#000;
+    }
+
+    .menu-item:hover{
+      background:#eef3ff;
+    }
+
+    .bottom-buttons{
+      margin-top:30px;
+    }
+
+    .export-btn{
+      width:100%;
+      background:#000;
+      color:#fff;
+      border:none;
+      padding:12px;
+      margin-bottom:14px;
+      border-radius:4px;
+      font-weight:600;
+      cursor:pointer;
+    }
+
+    .side-footer{
+      margin-top:25px;
+    }
+
+    .side-footer div{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:12px;
+      font-size:14px;
+      color:#444;
+      cursor:pointer;
+    }
+
+    /* MAIN */
+
+    .main{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+    }
+
+    /* CONTENT */
+
+    .content{
+      padding:35px;
+    }
+
+    .page-title{
+      font-size:42px;
+      font-weight:700;
+      margin-bottom:12px;
+    }
+
+    .page-subtitle{
+      color:#666;
+      font-size:16px;
+      margin-bottom:35px;
+    }
+
+    /* FORM CARD */
+
+    .loan-form-card{
+      background:#fff;
+      border:1px solid #ddd;
+      border-radius:10px;
+      padding:30px;
+      max-width:980px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:25px;
+    }
+
+    .form-group{
+      display:flex;
+      flex-direction:column;
+    }
+
+    .form-group label{
+      font-size:14px;
+      font-weight:700;
+      margin-bottom:10px;
+      color:#222;
+    }
+
+    .form-group input,
+    .form-group select{
+      height:54px;
+      border:1px solid #ccc;
+      border-radius:6px;
+      padding:0 15px;
+      font-size:15px;
+      background:#fff;
+      outline:none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus{
+      border-color:#000;
+    }
+
+    .divider{
+      border-top:1px solid #eee;
+      margin:25px 0;
+    }
+
+    .info-box{
+      margin-top:25px;
+      background:#f5f6f8;
+      border-radius:8px;
+      padding:18px;
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      color:#666;
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .info-box i{
+      margin-top:3px;
+      color:#666;
+    }
+
+    .button-group{
+      display:flex;
+      justify-content:flex-end;
+      gap:15px;
+      margin-top:30px;
+    }
+
+    .cancel-btn{
+      width:110px;
+      height:50px;
+      background:#fff;
+      border:1px solid #ccc;
+      border-radius:6px;
+      font-weight:600;
+      cursor:pointer;
+    }
+
+    .create-btn{
+      width:160px;
+      height:50px;
+      background:#000;
+      color:#fff;
+      border:none;
+      border-radius:6px;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    /* PRO TIP */
+
+    .tip-card{
+      margin-top:30px;
+      background:#fff;
+      border-radius:10px;
+      overflow:hidden;
+      border:1px solid #ddd;
+      max-width:980px;
+    }
+
+    .tip-image{
+      width:100%;
+      height:180px;
+      object-fit:cover;
+    }
+
+    .tip-content{
+      padding:20px;
+    }
+
+    .tip-content h3{
+      font-size:18px;
+      margin-bottom:10px;
+    }
+
+    .tip-content p{
+      color:#555;
+      line-height:1.7;
+    }
+
+    /* FOOTER */
+
+    footer{
+      margin-top:auto;
+      background:#fff;
+      border-top:1px solid #ddd;
+      padding:18px 30px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:13px;
+      color:#555;
+    }
+
+    .footer-links{
+      display:flex;
+      gap:30px;
+    }
+
+    .footer-links a{
+      text-decoration:none;
+      color:#555;
+    }
+
+    @media(max-width:900px){
+
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+
+      .content{
+        padding:20px;
+      }
+
+      .page-title{
+        font-size:30px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <div>
+
+      <div class="logo">
+        <h1>AmortizePro</h1>
+        <p>FINANCIAL ANALYTICS</p>
+      </div>
+
+      <div class="menu">
+
+        <div class="menu-item">
+          <i class="fa-solid fa-table-columns"></i>
+          Overview
+        </div>
+
+        <div class="menu-item">
+          <i class="fa-solid fa-calculator"></i>
+          Calculator
+        </div>
+
+        <div class="menu-item">
+          <i class="fa-regular fa-rectangle-list"></i>
+          Amortization
+        </div>
+
+        <div class="menu-item">
+          <i class="fa-solid fa-chart-column"></i>
+          Reports
+        </div>
+
+        <div class="menu-item">
+          <i class="fa-solid fa-gear"></i>
+          Settings
+        </div>
+
+      </div>
+
+    </div>
+
+    <div>
+
+      <div class="bottom-buttons">
+
+        <button class="export-btn">
+          <i class="fa-solid fa-download"></i>
+          Export Report
+        </button>
+
+      </div>
+
+      <div class="side-footer">
+
+        <div>
+          <i class="fa-regular fa-circle-question"></i>
+          Help
+        </div>
+
+        <div>
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          Logout
+        </div>
+
+      </div>
+
+    </div>
+
+  </aside>
+
+  <!-- MAIN -->
+
+  <main class="main">
+
+
+    <!-- CONTENT -->
+
+    <div class="content">
+
+      <h1 class="page-title">Create New Loan</h1>
+
+      <p class="page-subtitle">
+        Configure your loan details to generate a precise amortization
+        schedule and payment forecast.
+      </p>
+
+      <!-- FORM CARD -->
+
+      <div class="loan-form-card">
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Loan Name</label>
+            <input type="text"
+              id="loanName"
+              placeholder="e.g. Primary Home Mortgage">
+          </div>
+
+          <div class="form-group">
+            <label>Lender</label>
+            <input type="text"
+              id="lender"
+              placeholder="e.g. Chase Bank">
+          </div>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Principal Amount ($)</label>
+            <input type="number"
+              id="loanAmount"
+              placeholder="$ 0.00">
+          </div>
+
+          <div class="form-group">
+            <label>Annual Interest Rate (%)</label>
+            <input type="number"
+              id="interestRate"
+              placeholder="4.5">
+          </div>
+
+          <div class="form-group">
+            <label>Loan Term (Years)</label>
+
+            <select id="loanTerm">
+              <option>5 Years</option>
+              <option>10 Years</option>
+              <option>15 Years</option>
+              <option>20 Years</option>
+              <option selected>30 Years</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Day Count Convention</label>
+
+            <select id="dayCount">
+              <option selected>360 Days</option>
+              <option>365 Days</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="form-grid">
+
+          <div class="form-group">
+            <label>Start Date</label>
+            <input type="date" id="startDate">
+          </div>
+
+          <div class="form-group">
+            <label>First Payment Date (Optional)</label>
+            <input type="date" id="firstPaymentDate">
+          </div>
+
+        </div>
+
+        <!-- INFO -->
+
+        <div class="info-box">
+
+          <i class="fa-solid fa-circle-info"></i>
+
+          <div>
+            Entering the principal and interest rate allows
+            AmortizePro to calculate your estimated monthly
+            installments. These calculations are for analytical
+            purposes only and may vary from your lender’s figures.
+          </div>
+
+        </div>
+
+        <!-- BUTTONS -->
+
+        <div class="button-group">
+
+          <button class="cancel-btn" id="cancelBtn">
+            Cancel
+          </button>
+
+          <button class="create-btn" id="createLoanBtn">
+            Create Loan
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- PRO TIP -->
+
+      <div class="tip-card">
+
+        <img
+          class="tip-image"
+          src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=1200&auto=format&fit=crop"
+          alt="finance">
+
+        <div class="tip-content">
+
+          <h3>Pro Tip</h3>
+
+          <p>
+            You can add multiple loans to compare total
+            interest paid over time in the Comparison Dashboard.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+      <div>
+        <strong>AmortizePro</strong>
+        &nbsp;&nbsp;
+        © 2024 AmortizePro Financial Systems.
+        All rights reserved.
+      </div>
+
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Support</a>
+      </div>
+
+    </footer>
+
+  </main>
+
+</div>
+
+<script>
+
+  // CREATE LOAN BUTTON
+
+  const createLoanBtn =
+    document.getElementById("createLoanBtn");
+
+  createLoanBtn.addEventListener("click", createLoan);
+
+  function createLoan(){
+
+    const loanName =
+      document.getElementById("loanName").value;
+
+    const lender =
+      document.getElementById("lender").value;
+
+    const loanAmount =
+      document.getElementById("loanAmount").value;
+
+    const interestRate =
+      document.getElementById("interestRate").value;
+
+    const loanTerm =
+      document.getElementById("loanTerm").value;
+
+    const startDate =
+      document.getElementById("startDate").value;
+
+    // VALIDATION
+
+    if(
+      !loanName ||
+      !lender ||
+      !loanAmount ||
+      !interestRate ||
+      !startDate
+    ){
+      alert("Please fill all required fields");
+      return;
+    }
+
+    // SAVE DATA
+
+    const loanData = {
+
+      loanName,
+      lender,
+      loanAmount,
+      interestRate,
+      loanTerm,
+      startDate
+
+    };
+
+    // STORE IN LOCAL STORAGE
+
+    localStorage.setItem(
+      "loanData",
+      JSON.stringify(loanData)
+    );
+
+    alert("Loan Created Successfully");
+
+    // REDIRECT
+
+    window.location.href = "../index.html";
+
+  }
+
+  // CANCEL BUTTON
+
+  const cancelBtn =
+    document.getElementById("cancelBtn");
+
+  cancelBtn.addEventListener("click", () => {
+
+    window.history.back();
+
+  });
+
+</script>
+
+</body>
+</html>
