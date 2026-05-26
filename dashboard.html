@@ -1,151 +1,260 @@
-<!-- Main Code file -->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AmortizePro Dashboard</title>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <link rel="stylesheet" href="Calculator.css" />
+<title>AmortizePro Dashboard</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link rel="stylesheet" href="dashboard.css"/>
+
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- SIDEBAR -->
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
 
-        <aside class="sidebar">
+        <div>
 
-            <div>
-                <div class="logo">
-                    <h1>AmortizePro</h1>
-                    <p>FINANCIAL ANALYTICS</p>
-                </div>
-
-                <div class="menu">
-
-                    <div class="menu-item active">
-
-                        <i class="fa-solid fa-table-columns"></i>
-                        Dashboard
-
-                    </div>
-
-                    <div class="menu-item" onclick="window.location.href='Calculator.html'">
-                        <i class="fa-solid fa-calculator"></i>
-                        Calculator
-                    </div>
-
-                    <div class="menu-item" onclick="window.location.href='schedule.html'">
-                        <i class="fa-regular fa-rectangle-list"></i>
-                        Schedules
-                    </div>
-
-                    <div class="menu-item" onclick="window.location.href='report.html'">
-                        <i class="fa-solid fa-chart-column"></i>
-                        Reports
-                    </div>
-
-                    <div class="menu-item" onclick="window.location.href='settings.html'">
-                        <i class="fa-solid fa-gear"></i>
-                        Settings
-                    </div>
-
-                </div>
+            <div class="logo">
+                <h1>AmortizePro</h1>
+                <p>FINANCIAL ANALYTICS</p>
             </div>
 
-            <div>
+            <div class="menu">
 
-                <div class="bottom-buttons">
-
-                    <div class="side-footer">
-                        <div>
-                            <i class="fa-regular fa-circle-question"></i>
-                            Help
-                        </div>
-
-                        <div>
-                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                            Logout
-                        </div>
-                    </div>
-
+                <div class="menu-item active">
+                    <i class="fa-solid fa-table-columns"></i>
+                    Dashboard
                 </div>
 
-        </aside>
-
-        <!-- MAIN -->
-
-        <main class="main">
-
-            <!-- TOPBAR -->
-
-            <div class="topbar">
-
-                <div class="nav-links">
-                    <a href="#" class="active">Dashboard</a>
-                    <a href="#" onclick="window.location.href='calculator.html'">Calculator</a>
-                    <a href="#" onclick="window.location.href='schedule.html'">Schedules</a>
-                    <a href="#" onclick="window.location.href='report.html'">Reports</a>
+                <div class="menu-item">
+                    <i class="fa-solid fa-calculator"></i>
+                    Calculator
                 </div>
 
-                <div class="top-right">
+                <div class="menu-item">
+                    <i class="fa-regular fa-rectangle-list"></i>
+                    Schedules
+                </div>
 
-                    <button class="new-loan" id="newLoanBtn">New Loan</button>
+                <div class="menu-item">
+                    <i class="fa-solid fa-chart-column"></i>
+                    Reports
+                </div>
 
-                    <div href="#" class="profile" onclick="window.location.href='settings.html'">
-                    </div>
-
+                <div class="menu-item">
+                    <i class="fa-solid fa-gear"></i>
+                    Settings
                 </div>
 
             </div>
 
-            <!-- CONTENT -->
+        </div>
 
-            <div> 
-                <h1>Welcome to great karigaalan magic show</h1>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+
+            <div class="top-left">
+
+                <h2 class="page-heading">
+                    Dashboard
+                </h2>
+
+                <select id="loanSelector"
+                    class="loan-selector">
+                </select>
+
             </div>
 
-            <!-- FOOTER -->
+            <div class="top-right">
 
-            <footer>
+                <button class="new-loan"
+                    id="newLoanBtn">
 
-                <div>
-                    <strong>AmortizePro</strong>
-                    &nbsp;&nbsp;
-                    © 2024 AmortizePro Financial Systems.
-                    All rights reserved.
+                    New Loan
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <!-- KPI -->
+            <div class="summary-cards">
+
+                <div class="summary-card">
+
+                    <h4>Monthly EMI</h4>
+
+                    <h1 id="monthlyPayment">$0</h1>
+
                 </div>
 
-                <div class="footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Contact Support</a>
+                <div class="summary-card">
+
+                    <h4>Total Principal</h4>
+
+                    <h1 id="principalAmount">$0</h1>
+
                 </div>
 
-            </footer>
+                <div class="summary-card">
 
-        </main>
+                    <h4>Total Interest</h4>
 
-    </div>
-    <!-- jsPDF Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+                    <h1 id="totalInterest">$0</h1>
 
-    <script>
-        const newLoanBtn = document.getElementById("newLoanBtn");
+                </div>
 
-        newLoanBtn.addEventListener("click", () => {
-            window.location.href = "newloan.html";
-        });
-    </script>
+                <div class="summary-card">
 
+                    <h4>Remaining Balance</h4>
+
+                    <h1 id="remainingBalance">$0</h1>
+
+                </div>
+
+                <div class="summary-card">
+
+                    <h4>Active Loans</h4>
+
+                    <h1 id="activeLoans">0</h1>
+
+                </div>
+
+            </div>
+
+            <!-- CHARTS -->
+            <div class="dashboard-grid">
+
+                <div class="chart-card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Loan Balance Trend
+                        </h2>
+
+                    </div>
+
+                    <div class="chart-wrapper">
+                        <canvas id="balanceChart"></canvas>
+                    </div>
+
+                </div>
+
+                <div class="chart-card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            Principal vs Interest
+                        </h2>
+
+                    </div>
+
+                    <div class="chart-wrapper small-chart">
+                        <canvas id="breakdownChart"></canvas>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- INSIGHTS -->
+            <div class="insight-card">
+
+                <div class="card-header">
+
+                    <h2>
+                        Loan Insights
+                    </h2>
+
+                </div>
+
+                <div id="loanInsights"></div>
+
+            </div>
+
+            <!-- TABLE -->
+            <div class="table-card">
+
+                <div class="table-header">
+
+                    <div>
+
+                        <h2>
+                            Amortization Schedule
+                        </h2>
+
+                    </div>
+
+                    <div class="pagination-controls">
+
+                        <button id="prevPageBtn"
+                            class="page-btn">
+
+                            ← Back
+                        </button>
+
+                        <button id="nextPageBtn"
+                            class="page-btn">
+
+                            Next →
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>#</th>
+                            <th>Date</th>
+                            <th>Payment</th>
+                            <th>Principal</th>
+                            <th>Interest</th>
+                            <th>Balance</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="scheduleBody"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="dashboard.js"></script>
 
 </body>
-
 </html>
