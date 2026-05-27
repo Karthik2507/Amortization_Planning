@@ -76,7 +76,7 @@ body{
   font-size:14px;
   font-weight:600;
 
-  transition:0.2s ease;
+  transition:0.25s ease;
 }
 
 .menu-item.active{
@@ -86,6 +86,7 @@ body{
 
 .menu-item:hover{
   background:#eef4ff;
+  transform:translateX(3px);
 }
 
 .bottom-buttons{

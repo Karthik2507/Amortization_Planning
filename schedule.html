@@ -11,7 +11,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-    <link rel="stylesheet" href="calculator.css" />
+    <link rel="stylesheet" href="schedule.css" />
 </head>
 
 <body>
@@ -76,7 +76,8 @@
                         </div>
                     </div>
 
-                </div>
+                
+                    </div>
 
         </aside>
 
@@ -108,9 +109,131 @@
 
             <!-- CONTENT -->
 
-            <div> 
-                <h1>Welcome to great karigaalan magic show</h1>
+         <!-- CONTENT -->
+
+<div class="content">
+
+    <!-- PAGE TITLE -->
+
+    <div class="page-intro">
+
+        <h1>
+            Loan Schedules
+        </h1>
+
+        <p>
+            View detailed repayment schedules by selecting bank and loan.
+        </p>
+
+    </div>
+
+    <!-- FILTER CARD -->
+
+    <div class="filter-card">
+
+        <!-- BANK SELECT -->
+
+        <div class="filter-group">
+
+            <label>
+                Select Bank
+            </label>
+
+            <select id="bankSelector"
+                class="selector">
+
+            </select>
+
+        </div>
+
+        <!-- LOAN SELECT -->
+
+        <div class="filter-group">
+
+            <label>
+                Select Loan
+            </label>
+
+            <select id="loanSelector"
+                class="selector">
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <!-- TABLE CARD -->
+
+    <div class="table-card">
+
+        <!-- TABLE HEADER -->
+
+        <div class="table-header">
+
+            <div>
+
+                <h2>
+                    Loan Schedule Details
+                </h2>
+
+                <p>
+                    Complete amortization repayment history
+                </p>
+
             </div>
+
+            <div class="pagination-controls">
+
+                <button id="prevPageBtn"
+                    class="page-btn">
+
+                    ← Back
+                </button>
+
+                <button id="nextPageBtn"
+                    class="page-btn">
+
+                    Next →
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- TABLE -->
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>#</th>
+                        <th>Bank</th>
+                        <th>Loan</th>
+                        <th>Date</th>
+                        <th>Payment</th>
+                        <th>Principal</th>
+                        <th>Interest</th>
+                        <th>Balance</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="scheduleBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
 
             <!-- FOOTER -->
 
@@ -145,7 +268,7 @@
         });
     </script>
 
-
+<script src="schedules.js"></script>
 </body>
 
 </html>
