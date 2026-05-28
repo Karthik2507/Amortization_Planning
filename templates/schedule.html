@@ -1,0 +1,275 @@
+<!-- Main Code file -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AmortizePro Dashboard</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='schedule.css') }}" />
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div>
+                <div class="logo">
+                    <h1>AmortizePro</h1>
+                    <p>FINANCIAL ANALYTICS</p>
+                </div>
+
+                <div class="menu">
+
+                    <div class="menu-item" onclick="window.location.href='/dashboard'">
+
+                        <i class="fa-solid fa-table-columns"></i>
+                        Dashboard
+
+                    </div>
+
+                    <div class="menu-item" onclick="window.location.href='/calculator'">
+                        <i class="fa-solid fa-calculator"></i>
+                        Calculator
+                    </div>
+
+                    <div class="menu-item active" >
+                        <i class="fa-regular fa-rectangle-list"></i>
+                        Schedules
+                    </div>
+
+                    <div class="menu-item" onclick="window.location.href='/reports'">
+                        <i class="fa-solid fa-chart-column"></i>
+                        Reports
+                    </div>
+
+                    <div class="menu-item" onclick="window.location.href='/settings'">
+                        <i class="fa-solid fa-gear"></i>
+                        Settings
+                    </div>
+
+                </div>
+            </div>
+
+            <div>
+
+                <div class="bottom-buttons">
+
+                    <div class="side-footer">
+                        <div>
+                            <i class="fa-regular fa-circle-question"></i>
+                            Help
+                        </div>
+
+                        <div>
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            Logout
+                        </div>
+                    </div>
+
+                
+                    </div>
+
+        </aside>
+
+        <!-- MAIN -->
+
+        <main class="main">
+
+            <!-- TOPBAR -->
+
+            <div class="topbar">
+
+                <div class="nav-links">
+                    <a href="#" onclick="window.location.href='/dashboard'">Dashboard</a>
+                    <a href="#" onclick="window.location.href='/calculator'">Calculator</a>
+                    <a href="#" class="active">Schedules</a>
+                    <a href="#" onclick="window.location.href='/reports'">Reports</a>
+                </div>
+
+                <div class="top-right">
+
+                    <button class="new-loan" id="newLoanBtn">New Loan</button>
+
+                    <div href="#" class="profile" onclick="window.location.href='/settings'">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- CONTENT -->
+
+         <!-- CONTENT -->
+
+<div class="content">
+
+    <!-- PAGE TITLE -->
+
+    <div class="page-intro">
+
+        <h1>
+            Loan Schedules
+        </h1>
+
+        <p>
+            View detailed repayment schedules by selecting bank and loan.
+        </p>
+
+    </div>
+
+    <!-- FILTER CARD -->
+
+    <div class="filter-card">
+
+        <!-- BANK SELECT -->
+
+        <div class="filter-group">
+
+            <label>
+                Select Bank
+            </label>
+
+            <select id="bankSelector"
+                class="selector">
+
+            </select>
+
+        </div>
+
+        <!-- LOAN SELECT -->
+
+        <div class="filter-group">
+
+            <label>
+                Select Loan
+            </label>
+
+            <select id="loanSelector"
+                class="selector">
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <!-- TABLE CARD -->
+
+    <div class="table-card">
+
+        <!-- TABLE HEADER -->
+
+        <div class="table-header">
+
+            <div>
+
+                <h2>
+                    Loan Schedule Details
+                </h2>
+
+                <p>
+                    Complete amortization repayment history
+                </p>
+
+            </div>
+
+            <div class="pagination-controls">
+
+                <button id="prevPageBtn"
+                    class="page-btn">
+
+                    ← Back
+                </button>
+
+                <button id="nextPageBtn"
+                    class="page-btn">
+
+                    Next →
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- TABLE -->
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>#</th>
+                        <th>Bank</th>
+                        <th>Loan</th>
+                        <th>Date</th>
+                        <th>Payment</th>
+                        <th>Principal</th>
+                        <th>Interest</th>
+                        <th>Balance</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="scheduleBody"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+            <!-- FOOTER -->
+
+            <footer>
+
+                <div>
+                    <strong>AmortizePro</strong>
+                    &nbsp;&nbsp;
+                    © 2024 AmortizePro Financial Systems.
+                    All rights reserved.
+                </div>
+
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Support</a>
+                </div>
+
+            </footer>
+
+        </main>
+
+    </div>
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+        const newLoanBtn = document.getElementById("newLoanBtn");
+
+        newLoanBtn.addEventListener("click", () => {
+            window.location.href = "/newloan";
+        });
+    </script>
+
+<script src="{{ url_for('static', filename='schedule.js') }}"></script>
+<script src="{{ url_for('static', filename='logout.js') }}"></script>
+</body>
+
+</html>

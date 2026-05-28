@@ -366,7 +366,7 @@ function setupButtons() {
     document.getElementById("newLoanBtn")
     .addEventListener("click", () => {
 
-        window.location.href = "newloan.html";
+        window.location.href = "/newloan";
     });
 }
 

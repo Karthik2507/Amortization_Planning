@@ -7,7 +7,7 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
-  <link rel="stylesheet" href="auth.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}" />
 </head>
 
 <body>
@@ -30,7 +30,7 @@
 
       <div class="switch-link">
         Don't have account?
-        <a href="signup.html">Signup</a>
+        <a href="/signup-page">Signup</a>
       </div>
 
     </div>
@@ -39,7 +39,7 @@
 
   <div class="toast-container" id="toastContainer"></div>
 
-  <script src="login.js"></script>
+  <script src="{{ url_for('static', filename='login.js') }}"></script>
 
 </body>
 

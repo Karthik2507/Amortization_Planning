@@ -144,14 +144,12 @@ async function signup() {
   const data = await response.json();
 
   if (data.success) {
-    showToast("success", "Account Created", "Redirecting to login...");
+    showToast("success", "Account Created", data.message);
 
     setTimeout(() => {
-      window.location.href = "login.html";
-    }, 1500);
-
-    window.location.href = "login.html";
+      window.location.href = "/";
+    }, 1800);
   } else {
-    alert(data.message);
+    showToast("error", "Signup Failed", data.message);
   }
 }

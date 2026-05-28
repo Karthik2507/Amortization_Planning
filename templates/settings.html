@@ -7,7 +7,7 @@
 
     <title>Settings</title>
 
-    <link rel="stylesheet" href="settings.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='settings.css') }}" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 </head>
@@ -28,22 +28,22 @@
 
                 <nav class="sidebar-nav">
 
-                    <a href="#" onclick="window.location.href='dashboard.html'"">
+                    <a href="#" onclick="window.location.href='/dashboard'"">
                         <i class="fa-solid fa-table-columns"></i>
                         <span>Dashboard</span>
                     </a>
 
-                    <a href="#" onclick="window.location.href='calculator.html'">
+                    <a href="#" onclick="window.location.href='/calculator'">
                         <i class="fa-solid fa-calculator"></i>
                         <span>Calculator</span>
                     </a>
 
-                    <a href="#" onclick="window.location.href='schedule.html'">
+                    <a href="#" onclick="window.location.href='/schedules'">
                         <i class="fa-regular fa-rectangle-list"></i>
                         <span>Schedules</span>
                     </a>
 
-                    <a href="#" onclick="window.location.href='report.html'">
+                    <a href="#" onclick="window.location.href='/reports'">
                         <i class="fa-solid fa-chart-column"></i>
                         <span>Reports</span>
                     </a>
@@ -87,10 +87,10 @@
                 <div class="top-left">
 
                     <nav class="top-nav">
-                        <a href="#" onclick="window.location.href='dashboard.html'">Dashboard</a>
-                        <a href="#" onclick="window.location.href='calculator.html'">Calculator</a>
-                        <a href="#" onclick="window.location.href='schedule.html'">Schedules</a>
-                        <a href="#" onclick="window.location.href='report.html'">Reports</a>
+                        <a href="#" onclick="window.location.href='/dashboard'">Dashboard</a>
+                        <a href="#" onclick="window.location.href='/calculator'">Calculator</a>
+                        <a href="#" onclick="window.location.href='/schedules'">Schedules</a>
+                        <a href="#" onclick="window.location.href='/reports'">Reports</a>
                     </nav>
 
                 </div>
@@ -280,7 +280,8 @@
     <!-- TOAST CONTAINER -->
     <div id="toastContainer" class="toast-container"></div>
 
-    <script src="settings.js"></script>
+    <script src="{{ url_for('static', filename='settings.js') }}"></script>
+    <script src="{{ url_for('static', filename='logout.js') }}"></script>
 
 </body>
 

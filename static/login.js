@@ -66,56 +66,52 @@ async function login() {
   const loginBtn = document.getElementById("loginBtn");
 
   const email = document.getElementById("email").value.trim();
-
   const password = document.getElementById("password").value.trim();
 
-  // EMPTY CHECK
   if (!email) {
     showToast("error", "Email Required", "Please enter your email address.");
-
     return;
   }
 
   if (!password) {
     showToast("error", "Password Required", "Please enter your password.");
-
     return;
   }
 
-  // LOADING STATE
-
+  // START LOADING
   loginBtn.classList.add("loading");
-
   loginBtn.disabled = true;
 
-  const response = await fetch("http://127.0.0.1:5000/login", {
-    method: "POST",
+  try {
+    const response = await fetch("http://127.0.0.1:5000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
 
-    headers: {
-      "Content-Type": "application/json",
-    },
+    const data = await response.json();
 
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-  });
+    if (data.success) {
+      showToast("success", "Login Successful", "Redirecting to dashboard...");
 
-  const data = await response.json();
+      localStorage.setItem("user", JSON.stringify(data));
 
-  // REALISTIC DELAY
+      // optional small delay ONLY for UX
+      await new Promise((r) => setTimeout(r, 800));
+      window.location.href = "/dashboard";
+    } else {
+      showToast("error", "Login Failed", data.message || "Invalid credentials");
 
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+      // ❗ IMPORTANT: STOP LOADING ON ERROR
+      loginBtn.classList.remove("loading");
+      loginBtn.disabled = false;
+    }
+  } catch (error) {
+    showToast("error", "Server Error", "Please try again later.");
 
-  if (data.success) {
-    showToast("success", "Login Successful", "Redirecting to dashboard...");
-
-    localStorage.setItem("user", JSON.stringify(data));
-
-    setTimeout(() => {
-      window.location.href = "settings.html";
-    }, 1200);
-  } else {
-    showToast("error", "Login Failed", data.message || "Invalid credentials.");
+    loginBtn.classList.remove("loading");
+    loginBtn.disabled = false;
   }
 }

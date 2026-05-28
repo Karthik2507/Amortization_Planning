@@ -3,7 +3,7 @@
 const newLoanBtn = document.getElementById("newLoanBtn");
 
 newLoanBtn.addEventListener("click", () => {
-    window.location.href = "newloan.html";
+    window.location.href = "/newloan";
 });
 
 // RECALCULATE BUTTON

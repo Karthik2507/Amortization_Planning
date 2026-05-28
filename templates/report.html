@@ -30,29 +30,29 @@
 
                 <div class="menu">
 
-                    <div class="menu-item" onclick="window.location.href='dashboard.html'">
+                    <div class="menu-item" onclick="window.location.href='/dashboard'">
 
                         <i class="fa-solid fa-table-columns"></i>
                         Dashboard
 
                     </div>
 
-                    <div class="menu-item" onclick="window.location.href='calculator.html'">
+                    <div class="menu-item" onclick="window.location.href='/calculator'">
                         <i class="fa-solid fa-calculator"></i>
                         Calculator
                     </div>
 
-                    <div class="menu-item"  onclick="window.location.href='schedule.html'" >
+                    <div class="menu-item"  onclick="window.location.href='/schedules'" >
                         <i class="fa-regular fa-rectangle-list"></i>
                         Schedules
                     </div>
 
-                    <div class="menu-item active" onclick="window.location.href='report.html'">
+                    <div class="menu-item active" onclick="window.location.href='/reports'">
                         <i class="fa-solid fa-chart-column"></i>
                         Reports
                     </div>
 
-                    <div class="menu-item" onclick="window.location.href='settings.html'">
+                    <div class="menu-item" onclick="window.location.href='/settings'">
                         <i class="fa-solid fa-gear"></i>
                         Settings
                     </div>
@@ -89,9 +89,9 @@
             <div class="topbar">
 
                 <div class="nav-links">
-                    <a href="#" onclick="window.location.href='dashboard.html'">Dashboard</a>
-                    <a href="#" onclick="window.location.href='calculator.html'">Calculator</a>
-                    <a href="#" onclick="window.location.href='schedule.html'">Schedules</a>
+                    <a href="#" onclick="window.location.href='/dashboard'">Dashboard</a>
+                    <a href="#" onclick="window.location.href='/calculator'">Calculator</a>
+                    <a href="#" onclick="window.location.href='/schedules'">Schedules</a>
                     <a href="#" class="active">Reports</a>
                 </div>
 
@@ -99,7 +99,7 @@
 
                     <button class="new-loan" id="newLoanBtn">New Loan</button>
 
-                    <div href="#" class="profile" onclick="window.location.href='settings.html'">
+                    <div href="#" class="profile" onclick="window.location.href='/settings'">
                     </div>
 
                 </div>
@@ -141,7 +141,7 @@
         const newLoanBtn = document.getElementById("newLoanBtn");
 
         newLoanBtn.addEventListener("click", () => {
-            window.location.href = "newloan.html";
+            window.location.href = "/newloan";
         });
     </script>
 

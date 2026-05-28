@@ -13,7 +13,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<link rel="stylesheet" href="dashboard.css"/>
+<link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}" />
 
 </head>
 
@@ -39,28 +39,28 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 </div>
 
 <div class="menu-item"
-     onclick="window.location.href='calculator.html'">
+     onclick="window.location.href='/calculator'">
 
     <i class="fa-solid fa-calculator"></i>
     Calculator
 </div>
 
 <div class="menu-item"
-     onclick="window.location.href='schedule.html'">
+     onclick="window.location.href='/schedules'">
 
     <i class="fa-regular fa-rectangle-list"></i>
     Schedules
 </div>
 
 <div class="menu-item"
-     onclick="window.location.href='report.html'">
+     onclick="window.location.href='/reports'">
 
     <i class="fa-solid fa-chart-column"></i>
     Reports
 </div>
 
 <div class="menu-item"
-     onclick="window.location.href='settings.html'">
+     onclick="window.location.href='/settings'">
 
     <i class="fa-solid fa-gear"></i>
     Settings
@@ -262,7 +262,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 
 </div>
 
-<script src="dashboard.js"></script>
+<script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+<script src="{{ url_for('static', filename='logout.js') }}"></script>
 
 </body>
 </html>

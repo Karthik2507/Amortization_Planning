@@ -190,7 +190,7 @@ window.onload = function () {
     );
 
     setTimeout(() => {
-      window.location.href = "calculator.html";
+      window.location.href = "/calculator";
     }, 1800);
   });
 

@@ -157,7 +157,7 @@ async function changePassword() {
     localStorage.clear();
 
     // prevent back navigation
-    window.location.replace("login.html");
+    window.location.replace("/login");
 
   } else {
     showToast(
@@ -201,7 +201,7 @@ async function deleteAccount(){
     localStorage.clear();
 
     window.location.href =
-      "login.html";
+      "/login";
 
   }
 
@@ -214,7 +214,7 @@ function logout(){
   localStorage.clear();
 
   window.location.href =
-    "login.html";
+    "/login";
 
 }
 

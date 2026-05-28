@@ -1,10 +1,21 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template, session, redirect, url_for
 from flask_cors import CORS
 import sqlite3
 import bcrypt
 import random
 
 app = Flask(__name__)
+
+@app.after_request
+def add_header(response):
+
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+
+    return response
+
+app.secret_key = "your_secret_key"
 CORS(app)
 
 DB = "database.db"
@@ -17,6 +28,14 @@ def generate_userid(name):
 
     return f"{number}{first}{last}"
 
+
+@app.route("/")
+def home():
+    return render_template("login.html")
+
+@app.route("/signup-page")
+def signup_page():
+    return render_template("signup.html")
 
 # REGISTER
 @app.route("/signup", methods=["POST"])
@@ -59,7 +78,7 @@ def signup():
             "message": "User created successfully"
         })
 
-    except:
+    except sqlite3.IntegrityError:
         return jsonify({
             "success": False,
             "message": "Email already exists"
@@ -97,7 +116,7 @@ def login():
             password.encode(),
             db_password.encode()
         ):
-
+            session["user"] = user[0]
             return jsonify({
                 "success": True,
                 "userid": user[0],
@@ -209,6 +228,70 @@ def delete_user():
     return jsonify({
         "success": True
     })
+
+
+# DASHBOARD PAGE
+@app.route("/dashboard")
+def dashboard():
+
+    if "user" not in session:
+        return redirect(url_for("home"))
+
+    return render_template("dashboard.html")
+
+
+# DASHBOARD PAGE
+@app.route("/newloan")
+def newloan():
+
+    if "user" not in session:
+        return redirect(url_for("home"))
+
+    return render_template("newloan.html")
+
+# LOGOUT
+@app.route("/logout")
+def logout():
+
+    session.clear()
+
+    response = redirect(url_for("home"))
+
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+
+    return response
+
+
+
+@app.route("/calculator")
+def calculator():
+    if "user" not in session:
+        return redirect(url_for("home"))
+    return render_template("calculator.html")
+
+
+@app.route("/schedules")
+def schedules():
+    if "user" not in session:
+        return redirect(url_for("home"))
+    return render_template("schedule.html")
+
+
+@app.route("/reports")
+def reports():
+    if "user" not in session:
+        return redirect(url_for("home"))
+    return render_template("reports.html")
+
+
+@app.route("/settings")
+def settings():
+    if "user" not in session:
+        return redirect(url_for("home"))
+    return render_template("settings.html")
+
 
 
 if __name__ == "__main__":
